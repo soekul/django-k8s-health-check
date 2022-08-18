@@ -7,4 +7,4 @@ except ImportError:
 if django and django.VERSION < (3, 2):  # pragma: no cover
     default_app_config = 'django_k8s_health_check.apps.DjangoHealthCheck'
 
-__version__ = '1.0.0'
+__version__ = '1.0.5'
