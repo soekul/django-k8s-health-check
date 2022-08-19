@@ -6,6 +6,29 @@ on:
       [created]
 
 jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.x"
+
+    - name: Install dependencies
+      run: |
+        pip install isort prospector xenon
+
+    - name: Run isort
+      run: isort . --check-only --diff
+
+    - name: Run xenon (Cyclomatic Complexity)
+      run: xenon --max-absolute B --max-modules A --max-average A ./django_k8s_health_check
+
+    - name: Run bandit
+      run: bandit -c profile-bandit.yml . -r -ll
+
   build-publish:
     runs-on: ubuntu-latest
 
