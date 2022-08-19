@@ -24,4 +24,4 @@ pylint.txt
 /venv/*
 /dist/*
 /build/*
-/django_k8s_health_check.egg-info/*
+/*.egg-info/*

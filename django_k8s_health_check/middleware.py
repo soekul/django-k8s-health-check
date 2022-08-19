@@ -33,7 +33,7 @@ class HealthCheckMiddleware(MiddlewareMixin):
 
     def validate_host(self, request: HttpRequest, host: str):  # pylint: disable=unused-argument
         if api_settings.ALLOWED_HOSTS is not None:
-            return request.path in api_settings.ALLOWED_HOSTS
+            return host in api_settings.ALLOWED_HOSTS
         return True
 
     def validate_origin(self, request: HttpRequest, host: str):  # pylint: disable=unused-argument
