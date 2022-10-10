@@ -8,11 +8,12 @@ from django_k8s_health_check import __version__
 
 extras_require = {
     'dev': [
-        'isort',
         'autopep8',
+    ],
+    'code-quality': [
+        'isort',
         'bandit',
-        'prospector',
-        'coverage',
+        'xenon',
     ]
 }
 

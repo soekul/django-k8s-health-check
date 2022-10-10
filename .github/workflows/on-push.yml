@@ -1,0 +1,11 @@
+name: Code Quality Tools
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  code-quality:
+    uses: ./.github/workflows/code-quality.yml
