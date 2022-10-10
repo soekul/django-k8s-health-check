@@ -11,7 +11,7 @@ class Command(BaseCommand):
         db_error, _ = HealthCheck.test_databases()
         if db_error:
             raise Exception('Database connection error')
-    
+
     def test_cache(self):
         cache_error, _ = HealthCheck.test_caches()
         if cache_error:
