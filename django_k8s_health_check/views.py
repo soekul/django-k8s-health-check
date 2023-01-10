@@ -18,6 +18,9 @@ class HealthView(GenericAPIView):
         if api_settings.SERVICE_NAME:
             data['service'] = api_settings.SERVICE_NAME
 
+        if api_settings.SERVICE_VERSION:
+            data['version'] = api_settings.SERVICE_VERSION
+
         if api_settings.CHECK_DATABASE:
             db_error, data['databases'] = HealthCheck.test_databases()
             has_error = not has_error and not db_error

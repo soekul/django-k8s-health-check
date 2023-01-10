@@ -9,6 +9,7 @@ USER_SETTINGS = getattr(settings, 'HEALTH_CHECK', None)
 DEFAULTS = {
     # View
     'SERVICE_NAME': None,
+    'SERVICE_VERSION': None,
     'CHECK_DATABASE': True,
     'CHECK_CACHE': True,
 
