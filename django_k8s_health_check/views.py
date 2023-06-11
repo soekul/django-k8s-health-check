@@ -7,6 +7,10 @@ from django_k8s_health_check.utils import HealthCheck
 
 
 class HealthView(GenericAPIView):
+    permission_classes = api_settings.PERMISSION_CLASSES
+    authentication_classes = api_settings.AUTHENTICATION_CLASSES
+    serializer_class = api_settings.SERIALIZER_CLASS
+    action = 'get'
 
     def get(self, *args, **kwargs):  # pylint: disable=unused-argument
         data, has_erro = self.mount_response_data()
