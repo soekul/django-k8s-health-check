@@ -7,6 +7,9 @@ from django_k8s_health_check.utils import HealthCheck
 
 
 class HealthView(GenericAPIView):
+    """
+        Use this api to check application and components status
+    """
     permission_classes = api_settings.PERMISSION_CLASSES
     authentication_classes = api_settings.AUTHENTICATION_CLASSES
     serializer_class = api_settings.SERIALIZER_CLASS
