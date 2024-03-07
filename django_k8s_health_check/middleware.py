@@ -2,25 +2,24 @@ from copy import copy
 
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
-from django.utils.deprecation import MiddlewareMixin
+#from django.utils.deprecation import MiddlewareMixin
 
 from django_k8s_health_check.settings import api_settings
 
 
-class HealthCheckMiddleware(MiddlewareMixin):
+class HealthCheckMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
 
-    def process_request(self, request: HttpRequest):
+    def __call__(self, request: HttpRequest):
         if self.validate_path(request):
             host = request._get_raw_host().split(':')[0]  # pylint: disable=protected-access
 
             if self.validate_host(request, host) and self.validate_origin(request, host):
-                if host not in settings.ALLOWED_HOSTS:
-                    setattr(self, 'OLD_ALLOWED_HOSTS', copy(settings.ALLOWED_HOSTS))
-                    settings.ALLOWED_HOSTS += [host]
+                return HttpResponse(status=204)
 
-    def process_response(self, request: HttpRequest, response: HttpResponse):  # pylint: disable=unused-argument
-        if hasattr(self, 'OLD_ALLOWED_HOSTS'):
-            settings.ALLOWED_HOSTS = self.OLD_ALLOWED_HOSTS
+        response: HttpResponse = self.get_response(request)
+
         return response
 
     ###
