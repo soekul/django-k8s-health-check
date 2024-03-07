@@ -2,14 +2,14 @@ from django.conf import settings
 from django.test.signals import setting_changed
 from django.utils.translation import gettext_lazy as _
 
-from rest_framework.settings import APISettings, api_settings
+from rest_framework.settings import APISettings, DEFAULTS as RF_DEFAULTS
 
 USER_SETTINGS = getattr(settings, 'HEALTH_CHECK', None)
 
 DEFAULTS = {
     # View
-    'PERMISSION_CLASSES': api_settings.DEFAULT_AUTHENTICATION_CLASSES,
-    'AUTHENTICATION_CLASSES': api_settings.DEFAULT_PERMISSION_CLASSES,
+    'PERMISSION_CLASSES': RF_DEFAULTS["DEFAULT_AUTHENTICATION_CLASSES"],
+    'AUTHENTICATION_CLASSES': RF_DEFAULTS["DEFAULT_PERMISSION_CLASSES"],
     'SERIALIZER_CLASS': 'django_k8s_health_check.serializer.HealthSerializer',
 
     # SERVICE INFO
